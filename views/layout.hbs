@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="javascripts/jquery.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script>
+    	var socket = io("127.0.0.1:3000");
+    	$(document).ready(function(){
+    		alert("hello ....");
+    	});
+    	$(linkedto).click(function() {
+    		socket.submit("sendfirst", "this is body");
+    	});
+    </script>
+  </head>
+  <body>
+    <a href="#" id="linkedto">{{{body}}}</a>
+  </body>
+</html>
