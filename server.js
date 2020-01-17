@@ -19,16 +19,16 @@ var usersRouter = require('./routes/users');
  * Get port from environment and store in Express.
  */
 
+
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
-
 /**
  * Create socket.io server.
  */
 
+
 var server = require("http").Server(app);
 var io = require("socket.io")(server);
-
 /**
  * Listen on provided port, on all network interfaces.
  */
@@ -47,18 +47,25 @@ server.listen(port);
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/testroute',testrouter);
-
 
 io.on("connection", function(socket){
   console.log("co nguoi ket noi."+socket.id);
+
   socket.on("disconnect", function(){
     console.log(socket.id + " ngat ket noi")
   });
+
+  // socket.on('send-data', (data) =>{
+  //   console.log(data);
+  //   console.log(socket.id);
+  // });
+
+
   socket.on("sendfirst", function(data){
-    console.log(data);
-  })
-})
+    console.log(socket.id + " send "+data);
+  });
+});
+
 
 
 

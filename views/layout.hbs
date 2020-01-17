@@ -2,20 +2,27 @@
 <html>
   <head>
     <title>{{title}}</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <link rel='stylesheet' href='/stylesheets/style.css' />
-    <script src="javascripts/jquery.js"></script>
-    <script src="socket.io/socket.io.js"></script>
+    <link rel='stylesheet' href='/stylesheets/freelancer.css' />
+     <!-- Custom fonts for this theme -->
+    <link href="/stylesheets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <script src="javascripts/jquery.js" rel="stylesheet"></script>
+    <script src="socket.io/socket.io.js" rel="stylesheet"></script>
     <script>
-    	var socket = io("127.0.0.1:3000");
-    	$(document).ready(function(){
-    		alert("hello ....");
-    	});
-    	$(linkedto).click(function() {
-    		socket.submit("sendfirst", "this is body");
-    	});
+      var socket = io("127.0.0.1:3000");
+      $(document).ready(function(){
+        alert("success");
+      })
     </script>
   </head>
-  <body>
-    <a href="#" id="linkedto">{{{body}}}</a>
+  <body id="page-top">
+    {{{body}}}
   </body>
 </html>
