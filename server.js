@@ -51,18 +51,20 @@ app.use('/users', usersRouter);
 io.on("connection", function(socket){
   console.log("co nguoi ket noi."+socket.id);
 
-  socket.on("disconnect", function(){
-    console.log(socket.id + " ngat ket noi")
-  });
+  
 
-  // socket.on('send-data', (data) =>{
-  //   console.log(data);
-  //   console.log(socket.id);
-  // });
+  socket.on("eventeee", function(data){
+    console.log(data);
+    console.log(socket.id + " send data ")
+  });
 
 
   socket.on("sendfirst", function(data){
-    console.log(socket.id + " send "+data);
+    console.log(socket.id + " send " + data);
+  });
+
+  socket.on("disconnect", function(){
+    console.log(socket.id + " ngat ket noi ")
   });
 });
 
