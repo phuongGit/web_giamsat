@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>server basic</title>
+	<script src="jquery.min.js"> </script>
+	<script src="socket.io/socket.io.js"></script>
+	<script>
+		
+	</script>
+	<script>
+		var socket = io("http://127.0.0.1:3000");
+
+
+		function httpGetAsync(theUrl, callback) { 
+                        var xmlHttp = new XMLHttpRequest();
+                        xmlHttp.onreadystatechange = function() {
+                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                        callback(JSON.parse(xmlHttp.responseText));
+                }
+                xmlHttp.open("GET", theUrl, true); // true for asynchronous
+                xmlHttp.send(null);
+        }
+
+
+
+		$(document).ready(function(){
+			alert("Log in page");
+			httpGetAsync('/get', function(data) {
+
+                        // Gán giá trị từ localhost:8000/get vào textbox để hiển thị
+                        document.getElementById("temp").value = data[0].temp;
+
+                        // Xuất ra màn hình console trên browser giá trị nhận được từ localhost:8000/get
+                        console.log(data);
+                        //Chart.render(); // chuyển đổi dữ liệu của của graph thành mô hình đồ họa
+                    });
+		})
+
+		socket.on("server-response",function(data){
+				$("#contents").append(data + ", ");
+		});
+	</script>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<textarea id="contents" name=""></textarea>
+</body>
+</html>
