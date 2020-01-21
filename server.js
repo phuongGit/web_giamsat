@@ -1,10 +1,9 @@
 #!/usr/bin/env node
-
 /**
  * Module dependencies.
  */
-
 //var app = require('./app');
+
 var path = require('path');
 
 var debug = require('debug')('giamsatmoitruong:server');
@@ -20,7 +19,7 @@ var usersRouter = require('./routes/users');
  */
 
 
-var port = normalizePort(process.env.PORT || '3000');
+var port = normalizePort(process.env.PORT || '8000');
 app.set('port', port);
 /**
  * Create socket.io server.
@@ -32,8 +31,6 @@ var io = require("socket.io")(server);
 /**
  * Listen on provided port, on all network interfaces.
  */
-
-
 app.use(express.static("public"));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -42,25 +39,24 @@ server.listen(port);
 /**
 * 
 */
-
-
-
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
 io.on("connection", function(socket){
-  console.log("co nguoi ket noi."+socket.id);
-
-  
-
-  socket.on("eventeee", function(data){
+  console.log(socket.id+" is connected");
+  socket.on("plainString", function(data){
+    console.log(data);
+    console.log(socket.id + " send data ")
+  });
+  socket.on("event", function(data){
     console.log(data);
     console.log(socket.id + " send data ")
   });
 
-
-  socket.on("sendfirst", function(data){
-    console.log(socket.id + " send " + data);
+  socket.on("temperature", function(data){
+    var objectt = JSON.parse(data);
+    io.socket.emit("aaaa",data);
+    console.log("successful temperature access" + objectt.temp);
   });
 
   socket.on("disconnect", function(){
@@ -91,7 +87,6 @@ io.on("connection", function(socket){
 /**
  * Normalize a port into a number, string, or false.
  */
-
 function normalizePort(val) {
   var port = parseInt(val, 10);
 
@@ -135,7 +130,6 @@ function onError(error) {
       throw error;
   }
 }
-
 /**
  * Event listener for HTTP server "listening" event.
  */
